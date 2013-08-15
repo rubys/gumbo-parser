@@ -1,0 +1,14 @@
+task 'default' => 'test'
+
+file 'Makefile' => 'extconf.rb' do
+  ruby 'extconf.rb'
+end
+
+task 'test' => 'Makefile' do
+  sh 'make -s'
+  ruby 'test_gumbo.rb'
+end
+
+task 'clean' do
+  sh 'rm -f Makefile *.o *.so mkmf.log'
+end
