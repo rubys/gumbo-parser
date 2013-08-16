@@ -8,7 +8,7 @@ Usage:
 -----
 
 ```ruby
-require './gumbo_parser'
+require 'gumbo-parser'
 doc = GumboParser.parse(string)
 ```
 
@@ -26,10 +26,6 @@ is returned.
 * Instead of returning 'unknown' as the element name for unknown tags, the
 original tag name is returned verbatim.
 
-* Producing a proper gem is planned in the near future, at the moment, this is
-merely a library.  Hence, the temporary need for a path in the `require` 
-statement.
-
 * Nothing meaningful is done with the `GumboDocument` struct, i.e., no
 Nokogiri `EntityDecl` is produced.
 
@@ -42,3 +38,8 @@ Installation:
 
 * Execute `rake`
 
+Related efforts:
+============
+
+* [ruby-gumbo](https://github.com/galdor/ruby-gumbo#readme) - a ruby binding
+for the Gumbo HTML5 parser.

@@ -1,3 +1,6 @@
+require 'rubygems/package_task'
+require 'rake/clean'
+
 task 'default' => 'test'
 
 file 'Makefile' => 'extconf.rb' do
@@ -6,9 +9,38 @@ end
 
 task 'test' => 'Makefile' do
   sh 'make -s'
-  ruby 'test_gumbo.rb'
+  ruby 'test-gumbo.rb'
 end
 
-task 'clean' do
-  sh 'rm -f Makefile *.o *.so mkmf.log'
+CLEAN.include('*.o', '*.so', '*.log', 'pkg', 'Makefile')
+
+MANIFEST = %w(
+  extconf.rb  
+  gumbo-parser.c  
+  lib/gumbo-parser.rb  
+  Rakefile  
+  README.md
+)
+
+SPEC = Gem::Specification.new do |gem|
+  gem.name = 'gumbo-parser'
+  gem.version = '0.1'
+  gem.email = 'rubys@intertwingly.net'
+  gem.homepage = 'https://github.com/rubys/gumbo-parser/tree/master/ruby#readme'
+  gem.summary = 'Ruby bindings for Gumbo HTML5 parser'
+  gem.files = MANIFEST
+  gem.extensions = 'extconf.rb'
+  gem.author = 'Sam Ruby'
+  gem.add_dependency 'nokogiri'
+  gem.license = 'Apache 2.0'
+  gem.description = %q(
+    At the moment, this is a proof of concept, allowing a Ruby
+    program to invoke the Gumbo HTML5 parser and access the result as a Nokogiri
+    parsed document.).strip.gsub(/\s+/, ' ')
+end
+
+task 'gem' => 'test'
+Gem::PackageTask.new(SPEC) do |pkg|
+  pkg.need_tar = true
+  pkg.need_zip = true
 end
