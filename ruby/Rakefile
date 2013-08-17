@@ -3,20 +3,24 @@ require 'rake/clean'
 
 task 'default' => 'test'
 
-file 'Makefile' => 'extconf.rb' do
-  ruby 'extconf.rb'
+file 'Makefile' => 'ext/extconf.rb' do
+  Dir.chdir 'ext' do 
+    ruby 'extconf.rb'
+  end
 end
 
 task 'test' => 'Makefile' do
-  sh 'make -s'
+  Dir.chdir 'ext' do 
+    sh 'make -s'
+  end
   ruby 'test-gumbo.rb'
 end
 
-CLEAN.include('*.o', '*.so', '*.log', 'pkg', 'Makefile')
+CLEAN.include('ext/*.o', 'ext/*.so', 'ext/*.log', 'ext/Makefile', 'pkg')
 
 MANIFEST = %w(
-  extconf.rb  
-  gumbo-parser.c  
+  ext/extconf.rb  
+  ext/gumbo-parser.c  
   lib/gumbo-parser.rb  
   Rakefile  
   README.md
@@ -29,7 +33,7 @@ SPEC = Gem::Specification.new do |gem|
   gem.homepage = 'https://github.com/rubys/gumbo-parser/tree/master/ruby#readme'
   gem.summary = 'Ruby bindings for Gumbo HTML5 parser'
   gem.files = MANIFEST
-  gem.extensions = 'extconf.rb'
+  gem.extensions = 'ext/extconf.rb'
   gem.author = 'Sam Ruby'
   gem.add_dependency 'nokogiri'
   gem.license = 'Apache 2.0'
