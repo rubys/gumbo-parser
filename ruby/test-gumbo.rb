@@ -1,4 +1,4 @@
-$: << '.'
+$:.push('.', 'ext')
 
 require 'lib/gumbo-parser'
 require 'test/unit'
