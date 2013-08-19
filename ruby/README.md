@@ -1,8 +1,8 @@
 GumboParser - a Ruby binding to the Gumbo HTML5 parser.
 ===========
 
-At the moment, this is a proof of concept, allowing a Ruby program to invoke
-the Gumbo HTML5 parser and access the result as a Nokogiri parsed document.
+This binding is deprecated, and will be removed in September 2013.  Use
+[nokogumbo](https://github.com/rubys/nokogumbo/#readme) instead.
 
 Usage:
 -----

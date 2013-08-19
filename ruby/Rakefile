@@ -28,7 +28,7 @@ MANIFEST = %w(
 
 SPEC = Gem::Specification.new do |gem|
   gem.name = 'gumbo-parser'
-  gem.version = '0.1'
+  gem.version = '0.2'
   gem.email = 'rubys@intertwingly.net'
   gem.homepage = 'https://github.com/rubys/gumbo-parser/tree/master/ruby#readme'
   gem.summary = 'Ruby bindings for Gumbo HTML5 parser'

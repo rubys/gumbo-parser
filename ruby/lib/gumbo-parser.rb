@@ -2,6 +2,11 @@ require 'nokogiri'
 require 'gumboc'
 
 class GumboParser < GumboC
+  def self.parse(string)
+    STDERR.puts("GumboParser is deprecated, use Nokogumbo instead")
+    super
+  end
+
   TAGS = [
     'HTML',
     'HEAD',
